@@ -39,7 +39,7 @@ function App() {
 const [driverCode, setDriverCode] = useState("");
   const [search, setSearch] = useState("");
   const [previewOrders, setPreviewOrders] = useState([]);
-  const [form, setForm] = useState({ order_no:"", customer_name:"", address:"", phone:"", driver:"Driver 1", notes:"" });
+ const [form, setForm] = useState({ order_no:"", customer_name:"", address:"", phone:"", driver:"", notes:"" });
 
   async function load() {
     const { data, error } = await supabase.from("deliveries").select("*").order("created_at", { ascending:false });
