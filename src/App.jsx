@@ -265,12 +265,30 @@ const driverOrders = active.filter(d => d.driver === driverView);
         {active.map(d => <OrderCard key={d.id} d={d} />)}
       </>}
 
-      {tab === "driver" && <>
-        <div className="card">
-          <label>Driver</label><select value={driverView} onChange={e=>setDriverView(e.target.value)}>{drivers.map(x=><option key={x}>{x}</option>)}</select>
-        </div>
-        {driverOrders.map(d => <OrderCard key={d.id} d={d} driverMode />)}
-      </>}
+    {tab === "driver" && <>
+  {!driverLoggedIn ? (
+    <div className="card">
+      <h2>Driver Login</h2>
+      <label>Enter Driver Code</label>
+      <input
+        value={driverCode}
+        onChange={e=>setDriverCode(e.target.value)}
+        placeholder="Enter code"
+        inputMode="numeric"
+      />
+      <button className="btn primary" onClick={driverLogin}>Login</button>
+    </div>
+  ) : (
+    <>
+      <div className="card">
+        <h2>{driverLoggedIn}</h2>
+        <p>Showing only your assigned deliveries.</p>
+        <button className="btn secondary" onClick={driverLogout}>Logout</button>
+      </div>
+      {active.filter(d => d.driver === driverLoggedIn).map(d => <OrderCard key={d.id} d={d} driverMode />)}
+    </>
+  )}
+</>}
 
       {tab === "history" && <>
         <input className="search" placeholder="Search history..." value={search} onChange={e=>setSearch(e.target.value)} />
