@@ -222,7 +222,7 @@ const driverOrders = active.filter(d => d.driver === driverView);
   return <div>
     <header><h1>Lakewood’s Gingerbread House</h1><p>Delivery App · 732.370.7933 · lakewoodbaskets.com</p></header>
     <nav>
-  {!driverLoggedIn && (
+  {officeLoggedIn && (
     <>
       <button className={tab==="office"?"active":""} onClick={()=>setTab("office")}>Office</button>
       <button className={tab==="history"?"active":""} onClick={()=>setTab("history")}>History</button>
