@@ -37,6 +37,8 @@ function App() {
   const [driverView, setDriverView] = useState("Driver 1");
  const [driverLoggedIn, setDriverLoggedIn] = useState(localStorage.getItem("driverLoggedIn") || "");
 const [driverCode, setDriverCode] = useState("");
+  const [officeLoggedIn, setOfficeLoggedIn] = useState(localStorage.getItem("officeLoggedIn") === "true");
+const [officeCode, setOfficeCode] = useState("");
   const [search, setSearch] = useState("");
   const [previewOrders, setPreviewOrders] = useState([]);
  const [form, setForm] = useState({ order_no:"", customer_name:"", address:"", phone:"", driver:"", notes:"" });
