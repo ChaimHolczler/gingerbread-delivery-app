@@ -45,6 +45,12 @@ const [driverCode, setDriverCode] = useState("");
     const { data, error } = await supabase.from("deliveries").select("*").order("created_at", { ascending:false });
     if (error) alert(error.message);
     else setDeliveries(data || []);
+    const { data: driverData } = await supabase
+  .from("drivers")
+  .select("*")
+  .eq("active", true);
+
+setDrivers(driverData || []);
   }
 
   useEffect(() => { load(); }, []);
