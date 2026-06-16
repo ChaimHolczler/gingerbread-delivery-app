@@ -246,7 +246,7 @@ const driverOrders = active.filter(d => d.driver === driverView);
           <label>Customer Name</label><input value={form.customer_name} onChange={e=>setForm({...form, customer_name:e.target.value})}/>
           <label>Address</label><input value={form.address} onChange={e=>setForm({...form, address:e.target.value})}/>
           <label>Customer Phone</label><input value={form.phone} onChange={e=>setForm({...form, phone:e.target.value})}/>
-          <label>Driver</label><select value={form.driver} onChange={e=>setForm({...form, driver:e.target.value})}>{drivers.map(x=><option key={x}>{x}</option>)}</select>
+          <label>Driver</label><select value={form.driver} onChange={e=>setForm({...form, driver:e.target.value})}>{drivers.map(x => <option key={x.id}>{x.name}</option>)})}</select>
           <label>Notes</label><textarea value={form.notes} onChange={e=>setForm({...form, notes:e.target.value})}/>
           <button className="btn primary">Add Delivery</button>
         </form>
