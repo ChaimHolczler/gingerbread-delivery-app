@@ -197,22 +197,16 @@ setDrivers(driverData || []);
   }
 
   const active = deliveries.filter(d => d.status !== "Delivered" && d.status !== "Failed");
-  function driverLogin() {
-  const codes = {
-    "1111": "Driver 1",
-    "2222": "Driver 2",
-    "3333": "Driver 3"
-  };
+ function driverLogin() {
+  const driver = drivers.find(d => d.pin === driverCode.trim());
 
-  const driver = codes[driverCode.trim()];
   if (!driver) return alert("Invalid driver code.");
 
-  localStorage.setItem("driverLoggedIn", driver);
-  setDriverLoggedIn(driver);
-  setDriverView(driver);
+  localStorage.setItem("driverLoggedIn", driver.name);
+  setDriverLoggedIn(driver.name);
+  setDriverView(driver.name);
   setTab("driver");
 }
-
 function driverLogout() {
   localStorage.removeItem("driverLoggedIn");
   setDriverLoggedIn("");
