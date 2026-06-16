@@ -35,6 +35,8 @@ function App() {
   const [tab, setTab] = useState("office");
   const [deliveries, setDeliveries] = useState([]);
   const [driverView, setDriverView] = useState("Driver 1");
+ const [driverLoggedIn, setDriverLoggedIn] = useState(localStorage.getItem("driverLoggedIn") || "");
+const [driverCode, setDriverCode] = useState("");
   const [search, setSearch] = useState("");
   const [previewOrders, setPreviewOrders] = useState([]);
   const [form, setForm] = useState({ order_no:"", customer_name:"", address:"", phone:"", driver:"Driver 1", notes:"" });
@@ -189,7 +191,28 @@ function App() {
   }
 
   const active = deliveries.filter(d => d.status !== "Delivered" && d.status !== "Failed");
-  const driverOrders = active.filter(d => d.driver === driverView);
+  function driverLogin() {
+  const codes = {
+    "1111": "Driver 1",
+    "2222": "Driver 2",
+    "3333": "Driver 3"
+  };
+
+  const driver = codes[driverCode.trim()];
+  if (!driver) return alert("Invalid driver code.");
+
+  localStorage.setItem("driverLoggedIn", driver);
+  setDriverLoggedIn(driver);
+  setDriverView(driver);
+  setTab("driver");
+}
+
+function driverLogout() {
+  localStorage.removeItem("driverLoggedIn");
+  setDriverLoggedIn("");
+  setDriverCode("");
+  }
+const driverOrders = active.filter(d => d.driver === driverView);
   const history = deliveries.filter(d => ["Delivered","Failed"].includes(d.status)).filter(d =>
     [d.order_no,d.customer_name,d.address,d.driver,d.status,d.failed_reason,d.receiver_name].join(" ").toLowerCase().includes(search.toLowerCase())
   );
